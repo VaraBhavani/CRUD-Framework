@@ -30,7 +30,7 @@ void read_key_field(char field_names[][SIZE]);
 FILE *fp_menu, *fp_main_data, *fp_fields;
 int counter;
 int field_count;
-char check_account_number[SIZE];
+char check_key_field[SIZE];
 char field_value[SIZE];
 int choice;
 char status;
@@ -171,7 +171,7 @@ void update()
 	char new_value[SIZE];
 	field_count = loading_files(field_names);
     read_key_field(field_names);
-    if (find_record(check_account_number))
+    if (find_record(check_key_field))
     {
     	printf("1. Update %s\n2. Update %s\n", field_names[1], field_names[2]);
     	printf("Enter choice: ");
@@ -195,7 +195,7 @@ void update()
     
 }
 
-int find_record(char* check_account_number)
+int find_record(char* check_key_field)
 {
 	fp_main_data = fopen(DATA_FILE, "rb+");
 	if (!fp_main_data)
@@ -204,7 +204,7 @@ int find_record(char* check_account_number)
 	}
 	while (fread(field_value, SIZE, 1, fp_main_data))
 	{
-		if (strcmp(field_value, check_account_number) == 0 )
+		if (strcmp(field_value, check_key_field) == 0 )
 		{
 			fseek(fp_main_data, SIZE * (field_count - 1), SEEK_CUR);
 			fread(&status, sizeof(char), 1, fp_main_data);
@@ -230,7 +230,7 @@ void delete_record()
     char status = 'D';
     field_count = loading_files(field_names);
     read_key_field(field_names);
-    if (find_record(check_account_number))
+    if (find_record(check_key_field))
     {
         fseek(fp_main_data, SIZE * field_count, SEEK_CUR);
     	fwrite(&status, sizeof(char), 1, fp_main_data);
@@ -255,7 +255,7 @@ void read_key_field(char field_names[][SIZE])
 {
     printf("Enter %s: ", field_names[0]);
     fgets(check_account_number, SIZE, stdin);
-    remove_new_line(check_account_number);
+    remove_new_line(check_key_field);
 }
 
 void open_field_file()
@@ -288,4 +288,5 @@ int loading_files(char field_names[][SIZE])
     load_fields_into_array(fp_fields, field_names, field_count);
     close_field_file();
     return field_count;
+
 }
