@@ -224,21 +224,24 @@ int find_record(char* check_key_field)
 	return 0;
 }
 
-
 void delete_record()
 {
+	char confirmation;
     char status = 'D';
     field_count = loading_files(field_names);
     read_key_field(field_names);
     if (find_record(check_key_field))
     {
-        fseek(fp_main_data, SIZE * field_count, SEEK_CUR);
-    	fwrite(&status, sizeof(char), 1, fp_main_data);
-    	fclose(fp_main_data);
-    	printf("Record deleted successfully.\n");
-    }
-
-    
+    	printf("You really want to delete record then press 'y'. ");
+    	scanf("%c", &confirmation);
+    	if (confirmation == 'y')
+    	{
+    		fseek(fp_main_data, SIZE * field_count, SEEK_CUR);
+    		fwrite(&status, sizeof(char), 1, fp_main_data);
+    		fclose(fp_main_data);
+    		printf("Record deleted successfully.\n");
+    	}
+    }   
 }
 
 void print_account_not_found()
@@ -290,4 +293,5 @@ int loading_files(char field_names[][SIZE])
     return field_count;
 
 }
+
 
