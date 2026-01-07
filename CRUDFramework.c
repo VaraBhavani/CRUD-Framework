@@ -254,7 +254,7 @@ void print_invalid()
 void read_key_field(char field_names[][SIZE])
 {
     printf("Enter %s: ", field_names[0]);
-    fgets(check_account_number, SIZE, stdin);
+    fgets(check_key_field, SIZE, stdin);
     remove_new_line(check_key_field);
 }
 
@@ -290,3 +290,4 @@ int loading_files(char field_names[][SIZE])
     return field_count;
 
 }
+
