@@ -4,8 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define INPUT_FIELDS "InputFields.cfg"
-#define MENU_OPTIONS "readMenu.cfg"
+#define INPUT_FIELDS "input_fields.cfg"
+#define MENU_OPTIONS "read_menu.cfg"
 #define DATA_FILE "user_details.dat"
 #define SIZE 50
 #define MAX_FIELDS 10
@@ -293,5 +293,6 @@ int loading_files(char field_names[][SIZE])
     return field_count;
 
 }
+
 
 
